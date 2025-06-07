@@ -167,91 +167,9 @@
 
 ## System Diagram
 
-```mermaid
-graph TB
-    subgraph "Mobile App Layer"
-        A[React Native App]
-        A1[Expo Audio]
-        A2[Expo Notifications]
-        A3[Expo SecureStore]
-        A4[SQLite Local DB]
-    end
-    
-    subgraph "Authentication Layer"
-        B[Supabase Auth]
-        B1[OAuth Providers]
-    end
-    
-    subgraph "Backend Services"
-        C[FastAPI Server]
-        C1[Practitioner API]
-        C2[Booking API]
-        C3[Session API]
-        C4[Analytics API]
-    end
-    
-    subgraph "Database Layer"
-        D[Supabase PostgreSQL]
-        D1[User Profiles]
-        D2[Practitioners]
-        D3[Bookings]
-        D4[Sessions]
-    end
-    
-    subgraph "External Services"
-        E[OpenAI API]
-        F[Stripe Payments]
-        G[PostHog Analytics]
-        H[Video Call SDK]
-        I[Push Notification Service]
-    end
-    
-    subgraph "Infrastructure"
-        J[Azure App Service]
-        K[CDN for Audio Files]
-        L[Docker Containers]
-    end
-    
-    A --> A1
-    A --> A2
-    A --> A3
-    A --> A4
-    A --> B
-    A --> C
-    
-    B --> B1
-    
-    C --> C1
-    C --> C2
-    C --> C3
-    C --> C4
-    C --> D
-    
-    D --> D1
-    D --> D2
-    D --> D3
-    D --> D4
-    
-    C --> E
-    C --> F
-    A --> G
-    A --> H
-    A2 --> I
-    
-    C --> J
-    A1 --> K
-    J --> L
-    
-    classDef mobile fill:#e1f5fe
-    classDef backend fill:#f3e5f5
-    classDef external fill:#fff3e0
-    classDef storage fill:#e8f5e8
-    
-    class A,A1,A2,A3,A4 mobile
-    class B,C,C1,C2,C3,C4 backend
-    class E,F,G,H,I external
-    class D,D1,D2,D3,D4,J,K,L storage
-```
+📊 **[View the complete system architecture diagram](system-diagram.md)**
+
+The system architecture demonstrates a comprehensive mobile-first approach with local-first privacy principles, hybrid cloud integration, and scalable backend services designed to support up to 100K users.
 
 ## Questions & Clarifications
 
