@@ -1,0 +1,59 @@
+# Hub Architecture Template
+# Usage: d2 hub-architecture.d2 output.svg
+
+direction: down
+
+# Central hub
+scheduler: {
+  label: "🕒 Central System"
+  shape: circle
+  style: {
+    fill: "#4A90E2"
+    stroke: "#2C3E50"
+    stroke-width: 3
+    font-color: white
+    font-weight: bold
+  }
+}
+
+# Component groups
+frontend: {
+  label: "🎨 Frontend"
+  style: {
+    fill: "#E3F2FD"
+    stroke: "#1976D2"
+    stroke-width: 2
+  }
+  
+  web: "Web App"
+  mobile: "Mobile App"
+}
+
+backend: {
+  label: "⚙️ Backend"
+  style: {
+    fill: "#FFF3E0"
+    stroke: "#F57C00"
+    stroke-width: 2
+  }
+  
+  api: "API Server"
+  auth: "Auth Service"
+}
+
+database: {
+  label: "💾 Data"
+  style: {
+    fill: "#F3E5F5"
+    stroke: "#7B1FA2"
+    stroke-width: 2
+  }
+  
+  primary: "Primary DB"
+  cache: "Cache"
+}
+
+# Connections
+frontend -> scheduler
+scheduler -> backend
+scheduler -> database
