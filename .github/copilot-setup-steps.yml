@@ -1,47 +1,49 @@
-name: D2 Diagram Tool Setup
+# copilot-setup-steps.yml
 
-# This workflow installs the D2 diagram tool and configures it in the environment
-# D2 is a modern diagram scripting language that turns text to diagrams
+# Installs D2 diagram tool for GitHub Copilot coding agent
 
-on:
-  workflow_dispatch:  # Allows manual triggering of the workflow
+steps:
 
-jobs:
-  setup-d2:
-    runs-on: ubuntu-latest
-    
-    steps:
-      # Step 1: Checkout the repository
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      
-      # Step 2: Install D2 using the official install script
-      - name: Install D2 diagram tool
-        run: |
-          # Download and run the official D2 installation script
-          curl -fsSL https://d2lang.com/install.sh | sh -s --
-        shell: bash
-      
-      # Step 3: Add D2 to PATH by modifying the .bashrc file
-      - name: Add D2 to PATH via .bashrc
-        run: |
-          # Add D2 binary location to PATH in .bashrc
-          echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
-          # Source .bashrc to apply changes in current session
-          source ~/.bashrc
-        shell: bash
-      
-      # Step 4: Verify the D2 installation by running 'd2 --version'
-      - name: Verify D2 installation
-        run: |
-          # Ensure D2 is in PATH and display version information
-          export PATH="$HOME/.local/bin:$PATH"
-          d2 --version
-        shell: bash
-      
-      # Optional: Display D2 help for additional verification
-      - name: Display D2 help (optional verification)
-        run: |
-          export PATH="$HOME/.local/bin:$PATH"
-          d2 --help
-        shell: bash
+# Install D2 diagram tool
+
+- name: Install D2
+  run: |
+  
+  # Download and install D2 using the official install script
+  
+  curl -fsSL https://d2lang.com/install.sh | sh -s --
+  
+  # Add D2 to PATH
+  
+  echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+  source ~/.bashrc
+  shell: bash
+
+# Install Structurizr CLI for C4 model diagrams
+
+- name: Install Structurizr CLI
+  run: |
+  
+  # Download latest Structurizr CLI
+  
+  wget https://github.com/structurizr/cli/releases/latest/download/structurizr-cli.zip
+  unzip structurizr-cli.zip
+  chmod +x structurizr.sh
+  
+  # Move to a location in PATH
+  
+  sudo mv structurizr.sh /usr/local/bin/structurizr
+  rm structurizr-cli.zip
+  shell: bash
+
+# Verify installations
+
+- name: Verify installations
+  run: |
+  source ~/.bashrc
+  d2 --version
+  echo "✅ D2 installed successfully"
+  
+  structurizr version
+  echo "✅ Structurizr CLI installed successfully"
+  shell: bash
