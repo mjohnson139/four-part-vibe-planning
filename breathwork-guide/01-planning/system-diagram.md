@@ -1,132 +1,144 @@
 # System Architecture Diagram
 
-## Breath Work Companion App - System Overview
+## Breath Work Companion App - Layered Architecture
 
 ```mermaid
-graph TB
-    subgraph "Mobile App Layer"
-        A[React Native App]
-        A1[Expo Audio]
-        A2[Expo Notifications]
-        A3[Expo SecureStore]
-        A4[SQLite Local DB]
+flowchart TD
+    subgraph "Layer 1: Presentation Layer"
+        A[React Native Mobile App]
+        A1[Expo Audio Player]
+        A2[Notification Manager]
+        A3[Local Storage Manager]
     end
     
-    subgraph "Authentication Layer"
-        B[Supabase Auth]
-        B1[OAuth Providers]
+    subgraph "Layer 2: Gateway & Authentication"
+        B[API Gateway]
+        B1[Supabase Auth Service]
+        B2[OAuth Providers<br/>Google, Apple, etc.]
     end
     
-    subgraph "Backend Services"
-        C[FastAPI Server]
-        C1[Practitioner API]
-        C2[Booking API]
-        C3[Session API]
-        C4[Analytics API]
+    subgraph "Layer 3: Application Services"
+        C[FastAPI Backend Server]
+        C1[Practitioner Service]
+        C2[Booking Service]
+        C3[Session Service]
+        C4[Analytics Service]
     end
     
-    subgraph "Database Layer"
-        D[Supabase PostgreSQL]
-        D1[User Profiles]
-        D2[Practitioners]
-        D3[Bookings]
-        D4[Sessions]
+    subgraph "Layer 4: External Services"
+        E[OpenAI API<br/>AI Coaching]
+        F[Stripe API<br/>Payments]
+        G[PostHog<br/>Analytics]
+        H[Video Call SDK<br/>Remote Sessions]
+        I[Push Notification<br/>Service]
     end
     
-    subgraph "External Services"
-        E[OpenAI API]
-        F[Stripe Payments]
-        G[PostHog Analytics]
-        H[Video Call SDK]
-        I[Push Notification Service]
+    subgraph "Layer 5: Data Layer"
+        D1[SQLite<br/>Local Database]
+        D2[Supabase PostgreSQL<br/>Cloud Database]
+        D3[CDN<br/>Audio Files]
     end
     
-    subgraph "Infrastructure"
+    subgraph "Layer 6: Infrastructure"
         J[Azure App Service]
-        K[CDN for Audio Files]
-        L[Docker Containers]
+        K[Docker Containers]
+        L[Load Balancer]
     end
     
-    A --> A1
-    A --> A2
-    A --> A3
-    A --> A4
+    %% Layer connections
     A --> B
-    A --> C
+    A1 --> B
+    A2 --> B
+    A3 --> D1
     
-    B --> B1
-    
-    C --> C1
-    C --> C2
-    C --> C3
-    C --> C4
-    C --> D
-    
-    D --> D1
-    D --> D2
-    D --> D3
-    D --> D4
+    B --> C
+    B1 --> B2
     
     C --> E
     C --> F
-    A --> G
+    C1 --> D2
+    C2 --> D2
+    C3 --> D2
+    C4 --> G
+    
     A --> H
     A2 --> I
+    A1 --> D3
     
     C --> J
-    A1 --> K
+    J --> K
     J --> L
     
-    classDef mobile fill:#e1f5fe
-    classDef backend fill:#f3e5f5
-    classDef external fill:#fff3e0
-    classDef storage fill:#e8f5e8
+    %% Styling
+    classDef presentation fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    classDef gateway fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef services fill:#e8f5e8,stroke:#388e3c,stroke-width:2px
+    classDef external fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    classDef data fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    classDef infrastructure fill:#efebe9,stroke:#5d4037,stroke-width:2px
     
-    class A,A1,A2,A3,A4 mobile
-    class B,C,C1,C2,C3,C4 backend
+    class A,A1,A2,A3 presentation
+    class B,B1,B2 gateway
+    class C,C1,C2,C3,C4 services
     class E,F,G,H,I external
-    class D,D1,D2,D3,D4,J,K,L storage
+    class D1,D2,D3 data
+    class J,K,L infrastructure
 ```
 
 ## Architecture Overview
 
-This diagram illustrates the comprehensive system architecture for the Breath Work Companion App, showing how different components interact across multiple layers:
+This layered architecture diagram illustrates the Breath Work Companion App's system design following standard enterprise architecture patterns, with clear separation of concerns across six distinct layers:
 
-### Mobile App Layer
-- **React Native App**: Cross-platform mobile application core
-- **Expo Audio**: Audio playback for breathing sessions and background sounds
-- **Expo Notifications**: Local and push notification management
-- **Expo SecureStore**: Encrypted storage for sensitive user data
-- **SQLite Local DB**: Local-first data storage for privacy and offline functionality
+### Layer 1: Presentation Layer
+- **React Native Mobile App**: Cross-platform mobile application providing the user interface
+- **Expo Audio Player**: Handles breathing session audio playback and background sounds
+- **Notification Manager**: Manages local and push notifications for user engagement
+- **Local Storage Manager**: Handles local data persistence and offline functionality
 
-### Authentication Layer
-- **Supabase Auth**: Managed authentication service
-- **OAuth Providers**: Third-party authentication options (Google, Apple, etc.)
+### Layer 2: Gateway & Authentication
+- **API Gateway**: Central entry point for all backend communications
+- **Supabase Auth Service**: Managed authentication and authorization
+- **OAuth Providers**: Third-party authentication (Google, Apple, Facebook, etc.)
 
-### Backend Services
-- **FastAPI Server**: High-performance API server
-- **Specialized APIs**: Modular services for practitioners, bookings, sessions, and analytics
+### Layer 3: Application Services
+- **FastAPI Backend Server**: High-performance API server handling business logic
+- **Practitioner Service**: Manages practitioner profiles and availability
+- **Booking Service**: Handles appointment scheduling and management
+- **Session Service**: Manages breathing sessions and user progress
+- **Analytics Service**: Processes user behavior and app performance metrics
 
-### Database Layer
-- **Supabase PostgreSQL**: Managed cloud database for shared data
-- **Partitioned Data**: User profiles, practitioner information, bookings, and session data
-
-### External Services
-- **OpenAI API**: AI-powered conversation and coaching
-- **Stripe Payments**: Secure payment processing for practitioner bookings
-- **PostHog Analytics**: Privacy-focused user analytics
-- **Video Call SDK**: Remote practitioner session support
+### Layer 4: External Services
+- **OpenAI API**: Provides AI-powered conversational coaching and personalization
+- **Stripe API**: Secure payment processing for practitioner bookings
+- **PostHog**: Privacy-focused analytics and user behavior tracking
+- **Video Call SDK**: Enables remote practitioner sessions
 - **Push Notification Service**: Cross-platform notification delivery
 
-### Infrastructure
-- **Azure App Service**: Scalable cloud hosting
-- **CDN**: Content delivery network for audio files
-- **Docker Containers**: Containerized deployment for consistency and scalability
+### Layer 5: Data Layer
+- **SQLite Local Database**: Client-side storage for personal data and offline functionality
+- **Supabase PostgreSQL**: Cloud database for shared data (practitioners, bookings)
+- **CDN**: Content delivery network for audio files and static assets
+
+### Layer 6: Infrastructure
+- **Azure App Service**: Scalable cloud hosting platform
+- **Docker Containers**: Containerized deployment for consistency and portability
+- **Load Balancer**: Distributes traffic across multiple service instances
 
 ## Key Architectural Principles
 
-1. **Local-First Privacy**: Core user data and progress stored locally on device
-2. **Hybrid Cloud Model**: Cloud services only for features requiring shared data
-3. **Scalable Backend**: FastAPI and Azure for handling growth to 100K+ users
-4. **Cross-Platform Efficiency**: React Native + Expo for iOS and Android support
-5. **AI Integration**: OpenAI API for personalized coaching with cost optimization
+1. **Layered Architecture**: Clear separation of concerns across presentation, gateway, service, data, and infrastructure layers
+2. **Local-First Privacy**: Core user data and progress stored locally in the presentation layer
+3. **API Gateway Pattern**: Centralized entry point for all backend communications and authentication
+4. **Microservices Approach**: Modular backend services for scalability and maintainability
+5. **Hybrid Cloud Model**: Strategic use of cloud services only where shared data is required
+6. **Cross-Platform Efficiency**: React Native + Expo for unified iOS and Android development
+7. **Scalable Infrastructure**: Azure App Service with containerization for elastic scaling to 100K+ users
+
+## Data Flow
+
+1. **User Interaction**: Mobile app captures user input in the presentation layer
+2. **Authentication**: Gateway layer validates user credentials via Supabase Auth
+3. **Business Logic**: Application services layer processes requests and applies business rules
+4. **External Integration**: Services layer communicates with external APIs as needed
+5. **Data Persistence**: Local SQLite for personal data, cloud PostgreSQL for shared data
+6. **Infrastructure**: Containerized services deployed on Azure with load balancing
