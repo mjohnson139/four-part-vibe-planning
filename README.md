@@ -1,6 +1,6 @@
 # Four-Part Vibe Coding Process
 
-A structured approach to software development that emphasizes planning, self-contained projects, and experimentation. This methodology is inspired by Sean Kochel's tutorial and focuses on creating a sustainable, enjoyable coding workflow.
+A structured approach to software development that emphasizes planning, self-contained projects, and experimentation. This methodology is inspired by Sean's tutorial and focuses on creating a sustainable, enjoyable coding workflow.
 
 ## Overview
 
@@ -241,7 +241,7 @@ We welcome contributions to improve the Four-Part Vibe Coding Process! Please:
 
 ## Resources
 
-- [Sean Kochel's Tutorial](https://www.youtube.com/watch?v=Y8v9EdmDwck)
+- [Sean's Tutorial](https://www.youtube.com/watch?v=Y8v9EdmDwck)
 
 
 ## License
