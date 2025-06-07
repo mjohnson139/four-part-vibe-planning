@@ -1,0 +1,47 @@
+name: D2 Diagram Tool Setup
+
+# This workflow installs the D2 diagram tool and configures it in the environment
+# D2 is a modern diagram scripting language that turns text to diagrams
+
+on:
+  workflow_dispatch:  # Allows manual triggering of the workflow
+
+jobs:
+  setup-d2:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      # Step 2: Install D2 using the official install script
+      - name: Install D2 diagram tool
+        run: |
+          # Download and run the official D2 installation script
+          curl -fsSL https://d2lang.com/install.sh | sh -s --
+        shell: bash
+      
+      # Step 3: Add D2 to PATH by modifying the .bashrc file
+      - name: Add D2 to PATH via .bashrc
+        run: |
+          # Add D2 binary location to PATH in .bashrc
+          echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+          # Source .bashrc to apply changes in current session
+          source ~/.bashrc
+        shell: bash
+      
+      # Step 4: Verify the D2 installation by running 'd2 --version'
+      - name: Verify D2 installation
+        run: |
+          # Ensure D2 is in PATH and display version information
+          export PATH="$HOME/.local/bin:$PATH"
+          d2 --version
+        shell: bash
+      
+      # Optional: Display D2 help for additional verification
+      - name: Display D2 help (optional verification)
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          d2 --help
+        shell: bash
