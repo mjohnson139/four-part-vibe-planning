@@ -182,22 +182,26 @@ Create a planning document that covers:
 ```
 my-vibe-project/
 ├── 01-planning/
-│   ├── project-spec.md
-│   ├── architecture.md
-│   └── technology-decisions.md
-├── 02-experimentation/
-│   ├── prototypes/
-│   ├── spike-solutions/
-│   └── experiment-results.md
-├── 03-implementation/
-│   ├── src/
-│   ├── tests/
-│   ├── docs/
-│   └── scripts/
-└── 04-reflection/
-    ├── retrospective.md
-    ├── metrics-analysis.md
-    └── next-steps.md
+│   ├── prompt.md                # The planning prompt used
+│   ├── output.md                # The full planning output (features, tech, requirements, Q&A)
+│   ├── images/                  # Any diagrams or planning visuals
+│   └── notes.md                 # Additional notes or clarifications
+├── 02-features/
+│   ├── prompt.md                # The feature expansion prompt
+│   ├── output.md                # Detailed feature specs, file tree, API, DB, etc.
+│   ├── images/                  # Diagrams (e.g., file tree, API flow)
+│   └── notes.md                 # Follow-up Q&A, clarifications
+├── 03-design/
+│   ├── prompt.md                # The UI design prompt (with inspiration images)
+│   ├── output.md                # UI design output (screens, components, principles)
+│   ├── images/                  # UI mockups, screenshots, design assets
+│   └── notes.md                 # Design rationale, feedback, iterations
+├── 04-execute/
+│   ├── prompt.md                # The task breakdown/execution prompt
+│   ├── output.md                # Task list, complexity analysis, subtasks
+│   ├── images/                  # Task flow diagrams, progress screenshots
+│   └── notes.md                 # Execution notes, blockers, retrospectives
+└── README.md                    # Project overview and navigation
 ```
 
 ## Best Practices
@@ -237,10 +241,8 @@ We welcome contributions to improve the Four-Part Vibe Coding Process! Please:
 
 ## Resources
 
-- [Sean Kochel's Tutorial](https://example.com) *(Link to be updated)*
-- [Project Planning Templates](./templates/)
-- [Example Projects](./examples/)
-- [Community Discussions](https://github.com/mjohnson139/four-part-vibe-planning/discussions)
+- [Sean Kochel's Tutorial](https://www.youtube.com/watch?v=Y8v9EdmDwck)
+
 
 ## License
 
