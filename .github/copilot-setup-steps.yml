@@ -1,0 +1,49 @@
+# copilot-setup-steps.yml
+
+# Installs D2 diagram tool for GitHub Copilot coding agent
+
+steps:
+
+# Install D2 diagram tool
+
+- name: Install D2
+  run: |
+  
+  # Download and install D2 using the official install script
+  
+  curl -fsSL https://d2lang.com/install.sh | sh -s --
+  
+  # Add D2 to PATH
+  
+  echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+  source ~/.bashrc
+  shell: bash
+
+# Install Structurizr CLI for C4 model diagrams
+
+- name: Install Structurizr CLI
+  run: |
+  
+  # Download latest Structurizr CLI
+  
+  wget https://github.com/structurizr/cli/releases/latest/download/structurizr-cli.zip
+  unzip structurizr-cli.zip
+  chmod +x structurizr.sh
+  
+  # Move to a location in PATH
+  
+  sudo mv structurizr.sh /usr/local/bin/structurizr
+  rm structurizr-cli.zip
+  shell: bash
+
+# Verify installations
+
+- name: Verify installations
+  run: |
+  source ~/.bashrc
+  d2 --version
+  echo "✅ D2 installed successfully"
+  
+  structurizr version
+  echo "✅ Structurizr CLI installed successfully"
+  shell: bash
