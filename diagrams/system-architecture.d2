@@ -1,0 +1,62 @@
+direction: right
+
+users: {
+  shape: person
+  label: "Users"
+  style.fill: "#4A90E2"
+}
+
+web_client: {
+  label: "Web Client\n(Next.js)"
+  style.fill: "#0070f3"
+  style.stroke: "#0050c7"
+  style.font-color: white
+}
+
+mobile_client: {
+  label: "Mobile Client\n(React Native)"
+  style.fill: "#61DAFB"
+  style.stroke: "#21A0C4"
+  style.font-color: black
+}
+
+vercel: {
+  label: "Vercel\n(Hosting & CDN)"
+  style.fill: "#000000"
+  style.font-color: white
+}
+
+supabase: {
+  label: "Supabase\n(Backend Services)"
+  style.fill: "#3ECF8E"
+  style.stroke: "#2A9F6B"
+  style.font-color: black
+}
+
+postgresql: {
+  label: "PostgreSQL\n(Database)"
+  style.fill: "#336791"
+  style.font-color: white
+}
+
+external_apis: {
+  label: "External APIs\n(Social Auth, etc.)"
+  style.fill: "#FF6B6B"
+  style.font-color: white
+}
+
+users -> web_client: "HTTPS" {style.stroke: "#4A90E2"}
+users -> mobile_client: "HTTPS" {style.stroke: "#4A90E2"}
+
+web_client -> vercel: "Deploy" {style.stroke: "#0070f3"}
+web_client -> supabase: "API Calls" {style.stroke: "#0070f3"}
+mobile_client -> supabase: "API Calls" {style.stroke: "#61DAFB"}
+
+supabase -> postgresql: "SQL Queries" {style.stroke: "#3ECF8E"}
+supabase -> external_apis: "OAuth" {style.stroke: "#3ECF8E"}
+
+web_client <-> mobile_client: "Real-time Sync" {
+  style.stroke-dash: 5
+  style.stroke: "#FF9500"
+  style.stroke-width: 3
+}
