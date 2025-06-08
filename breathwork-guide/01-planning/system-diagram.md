@@ -3,126 +3,98 @@
 ## Breath Work Companion App - Layered Architecture
 
 ```mermaid
-flowchart TD
-    subgraph "Layer 1: Presentation Layer"
-        A[React Native Mobile App]
-        A1[Expo Audio Player]
-        A2[Notification Manager]
-        A3[Local Storage Manager]
+flowchart TB
+    subgraph "📱 Presentation Layer"
+        direction LR
+        Mobile[React Native Mobile App<br/>• Expo Audio Player<br/>• Notification Manager<br/>• Local Storage Manager]
     end
     
-    subgraph "Layer 2: Gateway & Authentication"
-        B[API Gateway]
-        B1[Supabase Auth Service]
-        B2[OAuth Providers<br/>Google, Apple, etc.]
+    subgraph "🔐 Authentication & Gateway Layer"
+        direction LR
+        Gateway[API Gateway] 
+        Auth[Supabase Auth<br/>• OAuth Providers<br/>• Session Management]
     end
     
-    subgraph "Layer 3: Application Services"
-        C[FastAPI Backend Server]
-        C1[Practitioner Service]
-        C2[Booking Service]
-        C3[Session Service]
-        C4[Analytics Service]
+    subgraph "⚙️ Application Services Layer"
+        direction LR
+        API[FastAPI Backend Server<br/>• Practitioner Service<br/>• Booking Service<br/>• Session Service<br/>• Analytics Service]
     end
     
-    subgraph "Layer 4: External Services"
-        E[OpenAI API<br/>AI Coaching]
-        F[Stripe API<br/>Payments]
-        G[PostHog<br/>Analytics]
-        H[Video Call SDK<br/>Remote Sessions]
-        I[Push Notification<br/>Service]
+    subgraph "🌐 External Services Layer"
+        direction LR
+        OpenAI[OpenAI API<br/>AI Coaching]
+        Stripe[Stripe API<br/>Payments]
+        PostHog[PostHog<br/>Analytics]
+        Video[Video Call SDK<br/>Remote Sessions]
+        Push[Push Notifications]
     end
     
-    subgraph "Layer 5: Data Layer"
-        D1[SQLite<br/>Local Database]
-        D2[Supabase PostgreSQL<br/>Cloud Database]
-        D3[CDN<br/>Audio Files]
+    subgraph "💾 Data Layer"
+        direction LR
+        LocalDB[SQLite<br/>Local Database<br/>• User Progress<br/>• Personal Data]
+        CloudDB[Supabase PostgreSQL<br/>Cloud Database<br/>• Practitioners<br/>• Bookings]
+        CDN[CDN<br/>Audio Files<br/>• Session Recordings<br/>• Background Sounds]
     end
     
-    subgraph "Layer 6: Infrastructure"
-        J[Azure App Service]
-        K[Docker Containers]
-        L[Load Balancer]
+    subgraph "🏗️ Infrastructure Layer"
+        direction LR
+        Azure[Azure App Service<br/>• Docker Containers<br/>• Load Balancer<br/>• Auto-scaling]
     end
     
-    %% Layer connections
-    A --> B
-    A1 --> B
-    A2 --> B
-    A3 --> D1
+    %% Layer connections with cleaner flow
+    Mobile -.-> Gateway
+    Gateway --> Auth
+    Gateway --> API
     
-    B --> C
-    B1 --> B2
+    API --> OpenAI
+    API --> Stripe
+    API --> PostHog
+    API --> Video
+    API --> Push
     
-    C --> E
-    C --> F
-    C1 --> D2
-    C2 --> D2
-    C3 --> D2
-    C4 --> G
+    Mobile --> LocalDB
+    API --> CloudDB
+    Mobile -.-> CDN
     
-    A --> H
-    A2 --> I
-    A1 --> D3
+    API --> Azure
     
-    C --> J
-    J --> K
-    J --> L
+    %% Styling for better visual separation
+    classDef presentation fill:#e3f2fd,stroke:#1976d2,stroke-width:3px,color:#000
+    classDef gateway fill:#f3e5f5,stroke:#7b1fa2,stroke-width:3px,color:#000
+    classDef services fill:#e8f5e8,stroke:#388e3c,stroke-width:3px,color:#000
+    classDef external fill:#fff3e0,stroke:#f57c00,stroke-width:3px,color:#000
+    classDef data fill:#fce4ec,stroke:#c2185b,stroke-width:3px,color:#000
+    classDef infrastructure fill:#efebe9,stroke:#5d4037,stroke-width:3px,color:#000
     
-    %% Styling
-    classDef presentation fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
-    classDef gateway fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
-    classDef services fill:#e8f5e8,stroke:#388e3c,stroke-width:2px
-    classDef external fill:#fff3e0,stroke:#f57c00,stroke-width:2px
-    classDef data fill:#fce4ec,stroke:#c2185b,stroke-width:2px
-    classDef infrastructure fill:#efebe9,stroke:#5d4037,stroke-width:2px
-    
-    class A,A1,A2,A3 presentation
-    class B,B1,B2 gateway
-    class C,C1,C2,C3,C4 services
-    class E,F,G,H,I external
-    class D1,D2,D3 data
-    class J,K,L infrastructure
+    class Mobile presentation
+    class Gateway,Auth gateway
+    class API services
+    class OpenAI,Stripe,PostHog,Video,Push external
+    class LocalDB,CloudDB,CDN data
+    class Azure infrastructure
 ```
 
 ## Architecture Overview
 
 This layered architecture diagram illustrates the Breath Work Companion App's system design following standard enterprise architecture patterns, with clear separation of concerns across six distinct layers:
 
-### Layer 1: Presentation Layer
-- **React Native Mobile App**: Cross-platform mobile application providing the user interface
-- **Expo Audio Player**: Handles breathing session audio playback and background sounds
-- **Notification Manager**: Manages local and push notifications for user engagement
-- **Local Storage Manager**: Handles local data persistence and offline functionality
+### 📱 Presentation Layer
+The user-facing mobile application built with React Native and Expo, providing cross-platform compatibility and rich user interactions. Includes integrated audio playback, notification management, and local storage capabilities for offline functionality.
 
-### Layer 2: Gateway & Authentication
-- **API Gateway**: Central entry point for all backend communications
-- **Supabase Auth Service**: Managed authentication and authorization
-- **OAuth Providers**: Third-party authentication (Google, Apple, Facebook, etc.)
+### 🔐 Authentication & Gateway Layer
+Central authentication and API gateway services providing secure access control and request routing. Supabase Auth handles user authentication with OAuth provider integration for seamless login experiences.
 
-### Layer 3: Application Services
-- **FastAPI Backend Server**: High-performance API server handling business logic
-- **Practitioner Service**: Manages practitioner profiles and availability
-- **Booking Service**: Handles appointment scheduling and management
-- **Session Service**: Manages breathing sessions and user progress
-- **Analytics Service**: Processes user behavior and app performance metrics
+### ⚙️ Application Services Layer
+High-performance FastAPI backend server containing core business logic across specialized microservices for practitioners, bookings, sessions, and analytics. Designed for horizontal scaling and maintainability.
 
-### Layer 4: External Services
-- **OpenAI API**: Provides AI-powered conversational coaching and personalization
-- **Stripe API**: Secure payment processing for practitioner bookings
-- **PostHog**: Privacy-focused analytics and user behavior tracking
-- **Video Call SDK**: Enables remote practitioner sessions
-- **Push Notification Service**: Cross-platform notification delivery
+### 🌐 External Services Layer
+Third-party integrations providing specialized capabilities including AI-powered coaching (OpenAI), secure payments (Stripe), analytics (PostHog), video calling, and push notifications.
 
-### Layer 5: Data Layer
-- **SQLite Local Database**: Client-side storage for personal data and offline functionality
-- **Supabase PostgreSQL**: Cloud database for shared data (practitioners, bookings)
-- **CDN**: Content delivery network for audio files and static assets
+### 💾 Data Layer
+Hybrid data storage strategy with local SQLite for privacy-sensitive user data and cloud PostgreSQL for shared resources. CDN provides optimized delivery of audio content and static assets.
 
-### Layer 6: Infrastructure
-- **Azure App Service**: Scalable cloud hosting platform
-- **Docker Containers**: Containerized deployment for consistency and portability
-- **Load Balancer**: Distributes traffic across multiple service instances
+### 🏗️ Infrastructure Layer
+Azure App Service provides scalable cloud hosting with Docker containerization, load balancing, and auto-scaling capabilities to support growth to 100K+ users.
 
 ## Key Architectural Principles
 
@@ -136,9 +108,13 @@ This layered architecture diagram illustrates the Breath Work Companion App's sy
 
 ## Data Flow
 
-1. **User Interaction**: Mobile app captures user input in the presentation layer
-2. **Authentication**: Gateway layer validates user credentials via Supabase Auth
-3. **Business Logic**: Application services layer processes requests and applies business rules
-4. **External Integration**: Services layer communicates with external APIs as needed
+The system follows a clear top-down data flow through the layered architecture:
+
+1. **User Interaction**: Mobile app captures user input and displays responses
+2. **Gateway Routing**: API Gateway routes requests and validates authentication  
+3. **Business Logic**: Application services process requests and apply business rules
+4. **External Integration**: Services communicate with third-party APIs for specialized functions
 5. **Data Persistence**: Local SQLite for personal data, cloud PostgreSQL for shared data
-6. **Infrastructure**: Containerized services deployed on Azure with load balancing
+6. **Infrastructure**: Containerized services on Azure with automatic scaling and load balancing
+
+This architecture ensures data privacy through local-first storage while enabling collaborative features through selective cloud integration.
