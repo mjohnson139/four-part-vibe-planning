@@ -1,0 +1,121 @@
+grid-rows: 6
+style.fill: white
+
+classes: {
+  layer: {
+    style: {
+      fill: "#f5deb3"
+      stroke: "#8b4513"
+      stroke-width: 2
+      font-color: "#8b4513"
+    }
+  }
+  feature: {
+    style: {
+      fill: "white"
+      stroke: "#8b4513"
+      stroke-width: 1
+      font-color: "#8b4513"
+    }
+  }
+}
+
+"Presentation Layer": {
+  class: layer
+  "React Native Mobile App": {
+    class: feature
+    "Expo Audio Player"
+    "Notification Manager"
+    "Local Storage Manager"
+  }
+  "Conversational Onboarding": {
+    class: feature
+    "AI-powered chat interface"
+    "Natural language processing"
+    "Local SQLite storage"
+  }
+  "AI-Guided Breathing Sessions": {
+    class: feature
+    "Real-time coaching prompts"
+    "Expo Audio for background sounds"
+    "Offline session functionality"
+  }
+}
+
+"Authentication & Gateway Layer": {
+  class: layer
+  "API Gateway": {
+    class: feature
+  }
+  "Supabase Auth": {
+    class: feature
+    "OAuth Providers"
+    "Session Management"
+  }
+}
+
+"Application Services Layer": {
+  class: layer
+  "FastAPI Backend Server": {
+    class: feature
+    "Practitioner Service"
+    "Booking Service"
+    "Session Service"
+    "Analytics Service"
+  }
+}
+
+"External Services Layer": {
+  class: layer
+  "OpenAI API": {
+    class: feature
+    "AI Coaching"
+  }
+  "Stripe API": {
+    class: feature
+    "Payments"
+  }
+  "PostHog": {
+    class: feature
+    "Analytics"
+  }
+  "Video Call SDK": {
+    class: feature
+    "Remote Sessions"
+  }
+  "Push Notifications": {
+    class: feature
+  }
+}
+
+"Data Layer": {
+  class: layer
+  "SQLite": {
+    class: feature
+    "Local Database"
+    "User Progress"
+    "Personal Data"
+  }
+  "Supabase PostgreSQL": {
+    class: feature
+    "Cloud Database"
+    "Practitioners"
+    "Bookings"
+  }
+  "CDN": {
+    class: feature
+    "Audio Files"
+    "Session Recordings"
+    "Background Sounds"
+  }
+}
+
+"Infrastructure Layer": {
+  class: layer
+  "Azure App Service": {
+    class: feature
+    "Docker Containers"
+    "Load Balancer"
+    "Auto-scaling"
+  }
+}
