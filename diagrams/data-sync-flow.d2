@@ -1,0 +1,51 @@
+direction: right
+
+client_a: {
+  label: "Client A\n(Web)\n\nOptimistic UI Update"
+  style.fill: "#0070f3"
+  style.font-color: white
+}
+
+client_b: {
+  label: "Client B\n(Mobile)\n\nReal-time Update"
+  style.fill: "#f81ce5"
+  style.font-color: white
+}
+
+supabase_realtime: {
+  label: "Supabase\nRealtime"
+  style.fill: "#3ECF8E"
+  style.font-color: black
+}
+
+database: {
+  label: "PostgreSQL\nDatabase"
+  style.fill: "#336791"
+  style.font-color: white
+}
+
+# Step-by-step flow
+client_a -> supabase_realtime: "1. User Action" {
+  style.stroke: "#0070f3"
+  style.stroke-width: 3
+}
+
+supabase_realtime -> database: "2. Update Data" {
+  style.stroke: "#3ECF8E"
+  style.stroke-width: 3
+}
+
+database -> supabase_realtime: "3. Trigger Event" {
+  style.stroke: "#336791"
+  style.stroke-width: 3
+}
+
+supabase_realtime -> client_b: "4. Broadcast Update" {
+  style.stroke: "#f81ce5"
+  style.stroke-width: 3
+}
+
+supabase_realtime -> client_a: "5. Confirm Update" {
+  style.stroke: "#0070f3"
+  style.stroke-dash: 5
+}

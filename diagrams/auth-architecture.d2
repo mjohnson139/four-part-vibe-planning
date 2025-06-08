@@ -1,0 +1,82 @@
+direction: down
+
+user_devices: {
+  label: "User Devices"
+  style.fill: "#E8F4FD"
+  style.stroke: "#4A90E2"
+  
+  web: {
+    label: "Web Browser"
+    style.fill: "#0070f3"
+    style.font-color: white
+  }
+  mobile: {
+    label: "Mobile App"
+    style.fill: "#61DAFB"
+    style.font-color: black
+  }
+  tablet: {
+    label: "Tablet App"
+    style.fill: "#FF9500"
+    style.font-color: white
+  }
+}
+
+load_balancer: {
+  label: "Load Balancer\n(Vercel Edge)"
+  style.fill: "#000000"
+  style.font-color: white
+}
+
+auth_service: {
+  label: "Supabase Auth"
+  style.fill: "#3ECF8E"
+  style.font-color: black
+}
+
+database: {
+  label: "PostgreSQL\n+ RLS Policies\n(Row Level Security\nProtects User Data)"
+  style.fill: "#336791"
+  style.font-color: white
+}
+
+external_providers: {
+  label: "External Auth Providers"
+  style.fill: "#FFF2E1"
+  style.stroke: "#FF9500"
+  
+  google: {
+    label: "Google OAuth"
+    style.fill: "#4285F4"
+    style.font-color: white
+  }
+  github: {
+    label: "GitHub OAuth"
+    style.fill: "#24292E"
+    style.font-color: white
+  }
+  apple: {
+    label: "Apple Sign-In"
+    style.fill: "#000000"
+    style.font-color: white
+  }
+}
+
+# Connections
+user_devices.web -> load_balancer: "HTTPS"
+user_devices.mobile -> load_balancer: "HTTPS"
+user_devices.tablet -> load_balancer: "HTTPS"
+
+load_balancer -> auth_service: "JWT Tokens" {
+  style.stroke: "#4A90E2"
+  style.stroke-width: 3
+}
+
+auth_service -> database: "User Sessions" {
+  style.stroke: "#3ECF8E"
+  style.stroke-width: 3
+}
+
+auth_service <-> external_providers.google: "OAuth Flow"
+auth_service <-> external_providers.github: "OAuth Flow"
+auth_service <-> external_providers.apple: "OAuth Flow"
