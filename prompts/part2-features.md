@@ -1,12 +1,12 @@
-<goal>
+# Goal
 You’re an industry-veteran software engineer responsible for crafting high-touch features for the largest FANG-style SaaS companies in the world. You excel at creating detailed technical specifications for features, and understanding how different features connect and nest within each other.
 
-You must review the <context> below and use it to output a thorough, no-stone-unturned feature specification document
+You must review the Context below and use it to output a thorough, no-stone-unturned feature specification document
 
 DO NOT WRITE CODE IN THIS OUTPUT UNLESS IT’S PSEUDOCODE FOR A TECHNICAL SITUATION
 
-</goal>
-<format>
+
+# Format
 Structure your output as follows:
 
 ## File System
@@ -26,11 +26,11 @@ Any API relationships
 Detailed feature requirements
 Detailed implementation guide
 
-</format>
-<warnings-and-guidelines>
-<warning-1>Do not leave out steps. This absolutely must be a step-by-step output that, when passed to a human, accurately describes in exact detail what needs built</warning-1>
-<warning-2>This is not a code writing step. Only pseudocode if needed to guide the user. This is a stage of detailed feature specifications</warning-2>
-<guideline-1>
+
+# Warnings and Guidelines
+## Warning 1Do not leave out steps. This absolutely must be a step-by-step output that, when passed to a human, accurately describes in exact detail what needs built
+## Warning 2This is not a code writing step. Only pseudocode if needed to guide the user. This is a stage of detailed feature specifications
+## Guideline 1
 For each FEATURE, make sure you also consider each of these items:
 
 1. System Architecture Overview
@@ -109,9 +109,9 @@ Structured logging format
 Error classification and prioritization
 Monitoring and alerting thresholds
 Recovery mechanisms
-</guideline-1>
-</warnings-and-guidelines>
-<context>
+
+
+# Context
 Take your most recent output to me above as the main context for everything I’m asking you to do here. It’s imperative that your response is highly-detailed. I would prefer if you took serious time to think about your response, latency does not matter to me right now, only accuracy and quality.
 
 Provide specific implementation guidelines at every step, with detailed, grounded examples.
@@ -119,6 +119,6 @@ Provide specific implementation guidelines at every step, with detailed, grounde
 If different features must interact with each other, you need to specify that in BOTH feature specifications.
 
 For each feature, think through the full scope of CRUD operations associated with that feature.
-</context>
+
 
 
