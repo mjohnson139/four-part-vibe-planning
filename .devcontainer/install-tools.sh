@@ -6,8 +6,8 @@ set -e
 echo "🚀 Installing D2 diagram tool for Four Part Vibe Planning..."
 
 # Install D2 diagram tool (pinned to v0.7.0)
-echo "📊 Installing D2 diagram tool v0.7.0..."
-curl -fsSL https://d2lang.com/install.sh | sh -s -- v0.7.0
+echo "📊 Installing D2 diagram tool with tala"
+curl -fsSL https://d2lang.com/install.sh | sh -s -- --tala
 
 # Add D2 to PATH in bashrc and current session
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
