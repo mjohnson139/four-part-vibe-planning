@@ -15,16 +15,30 @@ curl -fsSL https://d2lang.com/install.sh | sh -s --
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 export PATH="$HOME/.local/bin:$PATH"
 
-# Install Structurizr CLI for C4 model diagrams
-echo "🏗️ Installing Structurizr CLI..."
-cd /tmp
-wget -q https://github.com/structurizr/cli/releases/latest/download/structurizr-cli.zip
-unzip -q structurizr-cli.zip
-chmod +x structurizr.sh
+# Setup Structurizr CLI using Docker (avoids Java dependency issues)
+echo "🏗️ Setting up Structurizr CLI with Docker..."
 
-# Move to a location in PATH
-sudo mv structurizr.sh /usr/local/bin/structurizr
-rm -f structurizr-cli.zip
+# Create a wrapper script for Structurizr CLI that uses Docker
+sudo tee /usr/local/bin/structurizr > /dev/null << 'EOF'
+#!/bin/bash
+# Structurizr CLI Docker wrapper script
+# Usage: structurizr [command] [options]
+
+# Pull the latest Structurizr CLI Docker image if not present
+if ! docker image inspect structurizr/cli:latest &> /dev/null; then
+    echo "📥 Pulling Structurizr CLI Docker image..."
+    docker pull structurizr/cli:latest
+fi
+
+# Run Structurizr CLI in Docker container with current directory mounted
+docker run --rm -v "$PWD":/usr/local/structurizr structurizr/cli:latest "$@"
+EOF
+
+sudo chmod +x /usr/local/bin/structurizr
+
+# Pre-pull the Docker image for faster startup
+echo "📥 Pre-pulling Structurizr CLI Docker image..."
+docker pull structurizr/cli:latest
 
 # Verify installations
 echo "✅ Verifying installations..."
@@ -39,9 +53,16 @@ fi
 
 # Check Structurizr
 if command -v structurizr &> /dev/null; then
-    echo "✅ Structurizr CLI installed successfully: $(structurizr version)"
+    echo "✅ Structurizr CLI wrapper installed successfully"
+    # Test that Docker image is available
+    if docker image inspect structurizr/cli:latest &> /dev/null; then
+        echo "✅ Structurizr CLI Docker image ready"
+    else
+        echo "❌ Structurizr CLI Docker image not found"
+        exit 1
+    fi
 else
-    echo "❌ Structurizr CLI installation failed"
+    echo "❌ Structurizr CLI wrapper installation failed"
     exit 1
 fi
 

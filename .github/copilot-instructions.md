@@ -68,7 +68,7 @@ api -> db: SQL queries
 
 ### Structurizr CLI
 
-Structurizr CLI enables creation of C4 model diagrams for software architecture documentation.
+Structurizr CLI enables creation of C4 model diagrams for software architecture documentation. The CLI is run using Docker to avoid Java dependency issues.
 
 **Basic Usage:**
 ```bash
@@ -78,6 +78,9 @@ structurizr export -workspace workspace.dsl -format plantuml
 # Export to different formats
 structurizr export -workspace workspace.dsl -format svg
 structurizr export -workspace workspace.dsl -format png
+
+# Alternative: Run directly with Docker
+docker run --rm -v $PWD:/usr/local/structurizr structurizr/cli:latest export -workspace workspace.dsl -format svg
 ```
 
 **Example Structurizr DSL:**
