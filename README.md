@@ -1,10 +1,23 @@
 # Four-Part Vibe Coding Process
 
-A structured approach to software development that emphasizes planning, self-contained projects, and experimentation. This methodology is inspired by Sean Kochel's tutorial and focuses on creating a sustainable, enjoyable coding workflow.
+A structured approach to software development that emphasizes planning, self-contained projects, and experimentation. This methodology is inspired by Sean's tutorial and focuses on creating a sustainable, enjoyable coding workflow.
 
 ## Overview
 
 The Four-Part Vibe Coding Process is a development methodology that breaks down software projects into four distinct phases, each with its own "vibe" and focus. This approach promotes thoughtful planning, iterative development, and continuous learning while maintaining the joy and creativity in coding.
+
+## How the Four-Part Vibe Maps to Your Project
+
+The Four-Part Vibe methodology is designed to guide you from idea to execution, with each phase mapped to a clear folder structure in your project. Here’s how each step connects to your repo:
+
+| Vibe Step                      | Description                                 | Repo Folder         |
+|--------------------------------|---------------------------------------------|--------------------|
+| 1. Planning & Vision           | Define goals, requirements, and architecture| `01-planning/`     |
+| 2. Experimentation & Exploration| Prototype, validate, and explore solutions  | `02-features/`     |
+| 3. Implementation & Building   | Build, test, and document production code   | `03-design/`       |
+| 4. Reflection & Refinement     | Review, analyze, and plan improvements      | `04-execute/`      |
+
+Each folder contains prompts, outputs, images, and notes specific to that phase. This structure helps you keep planning, experimentation, design, and execution clearly separated and easy to navigate.
 
 ## Objectives
 
@@ -179,6 +192,8 @@ Create a planning document that covers:
 
 ## Example Project Structure
 
+See the table above for how each folder aligns with the Four-Part Vibe steps.
+
 ```
 my-vibe-project/
 ├── 01-planning/
@@ -241,7 +256,7 @@ We welcome contributions to improve the Four-Part Vibe Coding Process! Please:
 
 ## Resources
 
-- [Sean Kochel's Tutorial](https://www.youtube.com/watch?v=Y8v9EdmDwck)
+ [Sean Kochel's Tutorial](https://www.youtube.com/watch?v=Y8v9EdmDwck)
 
 
 ## License

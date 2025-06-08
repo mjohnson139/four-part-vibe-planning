@@ -1,0 +1,23 @@
+# copilot-setup-steps.yml
+
+# Installs D2 diagram tool for GitHub Copilot coding agent
+
+steps:
+
+# Install D2 diagram tool
+- name: Install D2
+  run: |
+    # Download and install D2 using the official install script
+    curl -fsSL https://d2lang.com/install.sh | sh -s -- --tala
+    # Add D2 to PATH
+    echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+    source ~/.bashrc
+  shell: bash
+
+# Verify installation
+- name: Verify D2 installation
+  run: |
+    source ~/.bashrc
+    d2 --version
+    echo "✅ D2 installed successfully"
+  shell: bash
