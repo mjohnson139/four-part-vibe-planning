@@ -1,10 +1,9 @@
-# GitHub Copilot Instructions
+# Four Part Vibe Planning
 
-## Repository Structure and Purpose
+You are a world-class software architect and developer, specializing in the precise and efficient design of software systems. Your task is to assist in the planning and architecture of software projects using the **Four Part Vibe** method, which emphasizes a structured approach to software development.
 
-The root of this repository is primarily for **documentation, editing templates, and detailed specifications** for app ideas using the Four Part Vibe method. 
-
-**Important: There is nothing to build** in the root directory of this repository.
+- The template prompts for the four parts are stored in the `prompts` folder.
+- Follow the prompts to the letter, ensuring that each part is addressed thoroughly.
 
 ## Project Organization
 
@@ -13,15 +12,6 @@ Each top-level folder in this repository represents a separate project, and some
 ## Working Within Projects
 
 If you're working within a specific project (top-level folder), please refer to that folder's own instructions and documentation. GitHub Copilot should focus on one project at a time, following the conventions and requirements specific to that project.
-
-## Development Methodology
-
-All work in this repository should generally follow the **Four Part Vibe coding method** as described in the referenced video tutorial. This methodology emphasizes:
-
-1. **Planning & Vision** - Define project goals, requirements, and architecture
-2. **Experimentation & Exploration** - Build prototypes and validate assumptions
-3. **Implementation & Building** - Create production-quality code incrementally
-4. **Reflection & Refinement** - Evaluate outcomes and plan improvements
 
 ## Diagram Tools
 
@@ -35,6 +25,8 @@ D2 is a modern diagram scripting language that turns text to diagrams. It's part
 - Process flows
 - Network diagrams
 
+**For high-level system diagrams, use the D2 grid layout format for clarity and structure.**
+
 **Basic Usage:**
 ```bash
 # Create a simple diagram
@@ -42,98 +34,81 @@ echo "users -> database: query" > diagram.d2
 d2 diagram.d2 diagram.svg
 
 # With layout options
-d2 --layout=dagre diagram.d2 diagram.png
+d2 --layout=elk diagram.d2 diagram.png
 ```
 
-**Example D2 Diagram:**
+**Example D2 Grid Diagram:**
 ```d2
-# System Architecture Example
-users: Users {
-  shape: person
-}
-web: Web App {
-  shape: hexagon
-}
-api: API Server {
-  shape: cylinder
-}
-db: Database {
-  shape: stored_data
-}
+grid-rows: 5
+style.fill: black
 
-users -> web: HTTP requests
-web -> api: API calls
-api -> db: SQL queries
-```
-
-### Structurizr CLI
-
-Structurizr CLI enables creation of C4 model diagrams for software architecture documentation. The CLI is run using Docker to avoid Java dependency issues.
-
-**Basic Usage:**
-```bash
-# Create workspace from DSL file
-structurizr export -workspace workspace.dsl -format plantuml
-
-# Export to different formats
-structurizr export -workspace workspace.dsl -format svg
-structurizr export -workspace workspace.dsl -format png
-
-# Alternative: Run directly with Docker
-docker run --rm -v $PWD:/usr/local/structurizr structurizr/cli:latest export -workspace workspace.dsl -format svg
-```
-
-**Example Structurizr DSL:**
-```
-workspace "Example System" {
-    model {
-        user = person "User"
-        system = softwareSystem "Example System" {
-            webapp = container "Web Application"
-            api = container "API"
-            database = container "Database"
-        }
-        
-        user -> webapp "Uses"
-        webapp -> api "Makes API calls"
-        api -> database "Reads/writes"
+classes: {
+  white square: {
+    label: ""
+    width: 120
+    style: {
+      fill: white
+      stroke: cornflowerblue
+      stroke-width: 10
     }
-    
-    views {
-        systemContext system {
-            include *
-            autoLayout
-        }
-        
-        container system {
-            include *
-            autoLayout
-        }
+  }
+  block: {
+    style: {
+      text-transform: uppercase
+      font-color: white
+      fill: darkcyan
+      stroke: black
     }
+  }
 }
+
+flow1.class: white square
+flow2.class: white square
+flow3.class: white square
+flow4.class: white square
+flow5.class: white square
+flow6.class: white square
+flow7.class: white square
+flow8.class: white square
+flow9.class: white square
+
+dagger engine: {
+  width: 800
+  class: block
+  style: {
+    fill: beige
+    stroke: darkcyan
+    font-color: blue
+    stroke-width: 8
+  }
+}
+
+any docker compatible runtime: {
+  width: 800
+  class: block
+  style: {
+    fill: lightcyan
+    stroke: darkcyan
+    font-color: black
+    stroke-width: 8
+  }
+  icon: https://icons.terrastruct.com/dev%2Fdocker.svg
+}
+
+any ci: {
+  class: block
+  style: {
+    fill: gold
+    stroke: maroon
+    font-color: maroon
+    stroke-width: 8
+  }
+}
+windows.class: block
+linux.class: block
+macos.class: block
+kubernetes.class: block
 ```
 
-### Integration with Four Part Vibe
 
-These diagram tools align perfectly with the Four Part Vibe methodology:
 
-1. **Planning & Vision**: Use D2 for high-level system diagrams and Structurizr for architecture context
-2. **Experimentation & Exploration**: Create quick proof-of-concept diagrams to visualize ideas
-3. **Implementation & Building**: Generate detailed technical diagrams for documentation
-4. **Reflection & Refinement**: Update diagrams to reflect lessons learned and architectural changes
-
-**Recommended Workflow:**
-- Store diagrams in the `images/` folder within each phase directory
-- Use descriptive filenames (e.g., `01-planning/images/system-overview.svg`)
-- Include both source files (.d2, .dsl) and generated images for version control
-- Reference diagrams in your markdown documentation
-
-## Contribution Guidelines
-
-When contributing to this repository:
-
-- Follow the Four Part Vibe methodology for any new projects or features
-- Respect the documentation-first approach of the root repository
-- For project-specific work, adhere to the individual project's guidelines
-- Maintain the clear separation between planning/documentation and implementation phases
-- Use diagram tools to enhance documentation with visual representations

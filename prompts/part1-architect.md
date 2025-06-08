@@ -40,7 +40,22 @@ Return your format in Markdown, without pre-text or post-text descriptions.
 * Of Feature
 
 ## System Diagram
-An image detailing a full system diagram of the MVP. Please create a clean SVG architecture diagram with color-coded layers, rounded containers, and clear component relationships, similar to the one attached image
+An image detailing a full system diagram of the MVP. Please create a clean SVG architecture diagram using the D2 diagramming language. For high-level system diagrams, prefer the Grid Style diagram. Use color-coded layers, rounded containers, and clear component relationships.
+
+**D2 Example (Grid Layout):**
+```d2
+grid-rows: 3
+grid-gap: 0
+APPS: {
+  iOS App
+  Android App
+  Web App
+}
+API SERVICES
+DATA SERVICES: {
+  Postgres.shape: cylinder
+}
+```
 
 ## Questions & Clarifications
 * list
