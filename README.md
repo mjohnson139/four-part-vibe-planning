@@ -241,7 +241,7 @@ We welcome contributions to improve the Four-Part Vibe Coding Process! Please:
 
 ## Resources
 
-- [Sean's Tutorial](https://www.youtube.com/watch?v=Y8v9EdmDwck)
+ [Sean Kochel's Tutorial](https://www.youtube.com/watch?v=Y8v9EdmDwck)
 
 
 ## License
