@@ -1,10 +1,9 @@
-# GitHub Copilot Instructions
+# Four Part Vibe Planning
 
-## Repository Structure and Purpose
+You are a world-class software architect and developer, specializing in the precise and efficient design of software systems. Your task is to assist in the planning and architecture of software projects using the **Four Part Vibe** method, which emphasizes a structured approach to software development.
 
-The root of this repository is primarily for **documentation, editing templates, and detailed specifications** for app ideas using the Four Part Vibe method. 
-
-**Important: There is nothing to build** in the root directory of this repository.
+- The template prompts for the four parts are stored in the `prompts` folder.
+- Follow the prompts to the letter, ensuring that each part is addressed thoroughly.
 
 ## Project Organization
 
@@ -14,20 +13,102 @@ Each top-level folder in this repository represents a separate project, and some
 
 If you're working within a specific project (top-level folder), please refer to that folder's own instructions and documentation. GitHub Copilot should focus on one project at a time, following the conventions and requirements specific to that project.
 
-## Development Methodology
+## Diagram Tools
 
-All work in this repository should generally follow the **Four Part Vibe coding method** as described in the referenced video tutorial. This methodology emphasizes:
+This repository includes pre-configured diagram tools to support visual documentation and architecture planning:
 
-1. **Planning & Vision** - Define project goals, requirements, and architecture
-2. **Experimentation & Exploration** - Build prototypes and validate assumptions
-3. **Implementation & Building** - Create production-quality code incrementally
-4. **Reflection & Refinement** - Evaluate outcomes and plan improvements
+### D2 Diagram Tool
 
-## Contribution Guidelines
+D2 is a modern diagram scripting language that turns text to diagrams. It's particularly useful for:
+- System architecture diagrams
+- Database schemas
+- Process flows
+- Network diagrams
 
-When contributing to this repository:
+**For high-level system diagrams, use the D2 grid layout format for clarity and structure.**
 
-- Follow the Four Part Vibe methodology for any new projects or features
-- Respect the documentation-first approach of the root repository
-- For project-specific work, adhere to the individual project's guidelines
-- Maintain the clear separation between planning/documentation and implementation phases
+**Basic Usage:**
+```bash
+# Create a simple diagram
+echo "users -> database: query" > diagram.d2
+d2 diagram.d2 diagram.svg
+
+# With layout options
+d2 --layout=elk diagram.d2 diagram.png
+```
+
+**Example D2 Grid Diagram:**
+```d2
+grid-rows: 5
+style.fill: black
+
+classes: {
+  white square: {
+    label: ""
+    width: 120
+    style: {
+      fill: white
+      stroke: cornflowerblue
+      stroke-width: 10
+    }
+  }
+  block: {
+    style: {
+      text-transform: uppercase
+      font-color: white
+      fill: darkcyan
+      stroke: black
+    }
+  }
+}
+
+flow1.class: white square
+flow2.class: white square
+flow3.class: white square
+flow4.class: white square
+flow5.class: white square
+flow6.class: white square
+flow7.class: white square
+flow8.class: white square
+flow9.class: white square
+
+dagger engine: {
+  width: 800
+  class: block
+  style: {
+    fill: beige
+    stroke: darkcyan
+    font-color: blue
+    stroke-width: 8
+  }
+}
+
+any docker compatible runtime: {
+  width: 800
+  class: block
+  style: {
+    fill: lightcyan
+    stroke: darkcyan
+    font-color: black
+    stroke-width: 8
+  }
+  icon: https://icons.terrastruct.com/dev%2Fdocker.svg
+}
+
+any ci: {
+  class: block
+  style: {
+    fill: gold
+    stroke: maroon
+    font-color: maroon
+    stroke-width: 8
+  }
+}
+windows.class: block
+linux.class: block
+macos.class: block
+kubernetes.class: block
+```
+
+
+

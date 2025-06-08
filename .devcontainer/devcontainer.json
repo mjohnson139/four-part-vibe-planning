@@ -1,0 +1,22 @@
+{
+  "name": "Four Part Vibe Planning Environment",
+  "image": "mcr.microsoft.com/devcontainers/universal:2-linux",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "postCreateCommand": ".devcontainer/install-tools.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.vscode-markdown",
+        "yzhang.markdown-all-in-one",
+        "ms-vscode.theme-github-plus",
+        "terrastruct.d2"
+      ],
+      "settings": {
+        "markdown.preview.enhanceWithMermaid": true
+      }
+    }
+  },
+  "remoteUser": "codespace"
+}
